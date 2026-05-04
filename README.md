@@ -21,7 +21,8 @@ O principal objetivo do CommuniCare é democratizar e ampliar o acesso aos servi
 
 ## Diagrama do Banco de Dados
 
-mermaid
+``mermaid
+
 erDiagram
     USUARIO ||--o{ AGENDAMENTO : realiza
     USUARIO ||--o{ NOTIFICACAO : recebe
@@ -81,7 +82,7 @@ erDiagram
         string CorpoTexto
         datetime DataPublicacao
     }
-
+``
 
 ## Integrantes
 
