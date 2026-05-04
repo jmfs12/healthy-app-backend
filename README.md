@@ -82,7 +82,7 @@ erDiagram
         string CorpoTexto
         datetime DataPublicacao
     }
-``
+```
 
 ## Integrantes
 
