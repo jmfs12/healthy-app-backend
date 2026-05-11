@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SaudeEBemEstarApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SaudeEBemEstarApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(SaudeEBemEstarApplication.class, args);
+    }
 }
