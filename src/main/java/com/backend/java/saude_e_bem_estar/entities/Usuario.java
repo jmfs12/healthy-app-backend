@@ -37,4 +37,6 @@ public class Usuario {
     @Column(name = "telefone", nullable = false)
     private String telefone;
 
+    @Column(name = "senha", nullable = false)
+    private String senha;
 }
