@@ -55,7 +55,7 @@ class UsuarioControllerTest {
     @Test
     void shouldReturnUserWhenAuthenticatedAndFound() throws Exception {
         Usuario user = new Usuario();
-        user.setId_usuario(1L);
+        user.setIdUsuario(1L);
         user.setEmail("joao@example.com");
         user.setNome_completo("João");
 
@@ -73,12 +73,12 @@ class UsuarioControllerTest {
     @Test
     void shouldUpdateUserWhenAuthenticated() throws Exception {
         Usuario user = new Usuario();
-        user.setId_usuario(1L);
+        user.setIdUsuario(1L);
         user.setEmail("joao@example.com");
         user.setNome_completo("João");
 
         Usuario updatedUser = new Usuario();
-        updatedUser.setId_usuario(1L);
+        updatedUser.setIdUsuario(1L);
         updatedUser.setEmail("joao@example.com");
         updatedUser.setNome_completo("João Alterado");
 
@@ -100,7 +100,7 @@ class UsuarioControllerTest {
     @Test
     void shouldDeleteUserWhenAuthenticated() throws Exception {
         Usuario user = new Usuario();
-        user.setId_usuario(1L);
+        user.setIdUsuario(1L);
         user.setEmail("joao@example.com");
 
         when(tokenService.validateToken("valid-token")).thenReturn("joao@example.com");

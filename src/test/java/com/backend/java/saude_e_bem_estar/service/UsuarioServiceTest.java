@@ -34,7 +34,7 @@ class UsuarioServiceTest {
     @BeforeEach
     void setUp() {
         usuario = new Usuario();
-        usuario.setId_usuario(1L);
+        usuario.setIdUsuario(1L);
         usuario.setNome_completo("João da Silva");
         usuario.setCpf("12345678901");
         usuario.setEmail("joao@example.com");
@@ -83,7 +83,7 @@ class UsuarioServiceTest {
         Usuario result = usuarioService.buscarPorId(1L);
 
         assertNotNull(result);
-        assertEquals(1L, result.getId_usuario());
+        assertEquals(1L, result.getIdUsuario());
         assertEquals("joao@example.com", result.getEmail());
     }
 

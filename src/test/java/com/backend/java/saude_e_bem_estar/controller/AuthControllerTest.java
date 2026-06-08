@@ -56,7 +56,7 @@ class AuthControllerTest {
         );
 
         Usuario createdUser = new Usuario();
-        createdUser.setId_usuario(1L);
+        createdUser.setIdUsuario(1L);
         createdUser.setNome_completo(request.nome_completo());
         createdUser.setCpf(request.cpf());
         createdUser.setEmail(request.email());

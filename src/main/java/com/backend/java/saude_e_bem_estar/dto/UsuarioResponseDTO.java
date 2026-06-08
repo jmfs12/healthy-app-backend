@@ -13,7 +13,7 @@ public record UsuarioResponseDTO(
 ) {
     public static UsuarioResponseDTO fromEntity(Usuario usuario) {
         return new UsuarioResponseDTO(
-            usuario.getId_usuario(),
+            usuario.getIdUsuario(),
             usuario.getNome_completo(),
             usuario.getCpf(),
             usuario.getData_nascimento(),
