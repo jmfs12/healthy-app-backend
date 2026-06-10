@@ -1,32 +1,52 @@
 package com.backend.java.saude_e_bem_estar.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.backend.java.saude_e_bem_estar.dto.UnidadeSaudeRequestDTO;
+import com.backend.java.saude_e_bem_estar.dto.UnidadeSaudeResponseDTO;
+import com.backend.java.saude_e_bem_estar.service.UnidadeSaudeService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/unidades")
 public class UnidadeSaudeController {
 
-    // Simulação de uma lista para teste 
-   private final List<String> unidadesTeste = new ArrayList<>();
+    private final UnidadeSaudeService unidadeSaudeService;
 
-    // O GET
-    @GetMapping
-    public ResponseEntity<List<String>> listarTodas() {
-        return ResponseEntity.ok(unidadesTeste);
+    public UnidadeSaudeController(UnidadeSaudeService unidadeSaudeService) {
+        this.unidadeSaudeService = unidadeSaudeService;
     }
 
-    // O POST
     @PostMapping
-    public ResponseEntity<String> criar(@RequestBody String nomeUnidade) {
-        unidadesTeste.add(nomeUnidade);
-        return ResponseEntity.status(201).body("Unidade " + nomeUnidade + " cadastrada com sucesso!");
+    public ResponseEntity<UnidadeSaudeResponseDTO> criar(@RequestBody @Valid UnidadeSaudeRequestDTO body) {
+        UnidadeSaudeResponseDTO unidadeCriada = unidadeSaudeService.criar(body);
+        return ResponseEntity.status(HttpStatus.CREATED).body(unidadeCriada);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UnidadeSaudeResponseDTO>> listarTodas() {
+        return ResponseEntity.ok(unidadeSaudeService.listarTodas());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UnidadeSaudeResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(unidadeSaudeService.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UnidadeSaudeResponseDTO> atualizar(
+            @PathVariable Long id,
+            @RequestBody @Valid UnidadeSaudeRequestDTO body
+    ) {
+        return ResponseEntity.ok(unidadeSaudeService.atualizar(id, body));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        unidadeSaudeService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
