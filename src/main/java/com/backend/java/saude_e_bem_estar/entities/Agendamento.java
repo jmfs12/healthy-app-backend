@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,8 +43,9 @@ public class Agendamento {
     @Column(name = "dataHora_agendada", nullable = false)
     private LocalDateTime dataHora_agendada;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 80)
-    private String status;
+    private StatusAgendamento status;
 
 
 

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
 
 import com.backend.java.saude_e_bem_estar.entities.Agendamento;
+import com.backend.java.saude_e_bem_estar.entities.StatusAgendamento;
 import com.backend.java.saude_e_bem_estar.repository.AgendamentoRepository;
 
 @Service
@@ -17,13 +18,12 @@ public class AgendamentoService {
     }
 
     public Agendamento criar(Agendamento agendamento){
-
-        if (agendamentoRepository.existsById(agendamento.getId_agendamento())) {
-            throw new RuntimeException("Agendamento já cadastrado.");
-        }
-        if (agendamentoRepository.existsByUsuarioIdAndDataHoraAgendada(agendamento.getId_agendamento(), agendamento.getDataHora_agendada())) {
+        if (agendamentoRepository.existsByUsuarioIdAndDataHoraAgendada(agendamento.getId_usuario(), agendamento.getDataHora_agendada())) {
             throw new RuntimeException("Já existe um agendamento cadastrado neste horário.");
         }
+
+        agendamento.setStatus(StatusAgendamento.PENDENTE);
+
         return agendamentoRepository.save(agendamento);
         
     }
@@ -54,6 +54,9 @@ public class AgendamentoService {
         }
         if (novosDados.getDataHora_agendada() != null){
             agendamentoExistente.setDataHora_agendada(novosDados.getDataHora_agendada());
+        }
+        if (novosDados.getStatus() != null){
+            agendamentoExistente.setStatus(novosDados.getStatus());
         }
 
         return agendamentoRepository.save(agendamentoExistente);
