@@ -4,6 +4,9 @@ package com.backend.java.saude_e_bem_estar.dto;
 
 import java.time.LocalDateTime;
 
+import com.backend.java.saude_e_bem_estar.entities.UnidadeSaude;
+import com.backend.java.saude_e_bem_estar.entities.Usuario;
+
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,10 +15,10 @@ import jakarta.validation.constraints.NotNull;
 public record AgendamentoRequestDTO
 (   
     @NotNull(message = "O usuário que será consultado é obrigatório")
-    Long idUsuario,
+    Usuario idUsuario,
 
     @NotNull(message = "A unidade de Saúde onde é obrigatória")
-    Long idUnidade,
+    UnidadeSaude idUnidade,
 
     @NotBlank(message = "É necessário informar o tipo de servico")
     String tipoServico,
