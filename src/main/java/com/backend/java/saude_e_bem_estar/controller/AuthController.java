@@ -8,6 +8,7 @@ import com.backend.java.saude_e_bem_estar.entities.Usuario;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
 import com.backend.java.saude_e_bem_estar.security.TokenService;
 import com.backend.java.saude_e_bem_estar.service.UsuarioService;
+import com.backend.java.saude_e_bem_estar.exceptions.CredenciaisInvalidasException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,10 +51,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO body) {
         Usuario usuario = usuarioRepository.findByEmail(body.email())
-                .orElse(null);
+                .orElseThrow(() -> new CredenciaisInvalidasException());
 
-        if (usuario == null || !passwordEncoder.matches(body.senha(), usuario.getSenha())) {
-            return ResponseEntity.badRequest().build();
+        if (!passwordEncoder.matches(body.senha(), usuario.getSenha())) {
+            throw new CredenciaisInvalidasException();
         }
 
         String token = tokenService.generateToken(usuario);

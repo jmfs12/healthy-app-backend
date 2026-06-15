@@ -53,7 +53,7 @@ public class AgendamentoController {
         return ResponseEntity.status(HttpStatus.OK).body(AgendamentoResponseDTO.fromEntity(agendamentoBuscado));
     }
 
-    @GetMapping("/{dataHoraAgendamento}")
+    @GetMapping("/data/{dataHoraAgendamento}")
     public ResponseEntity<AgendamentoResponseDTO> getByDataHora(@PathVariable LocalDateTime dataHoraAgendamento) {
         
         Agendamento agendamentoBuscado = agendamentoService.buscarPorData(dataHoraAgendamento);
