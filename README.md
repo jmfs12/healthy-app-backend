@@ -36,6 +36,7 @@ erDiagram
         date DataNascimento
         string Email
         string Telefone
+        string Senha
     }
     
     UNIDADE_SAUDE {
