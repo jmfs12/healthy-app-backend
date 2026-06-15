@@ -84,6 +84,25 @@ erDiagram
     }
 ```
 
+## Documentação da API e Segurança
+
+### Swagger UI & OpenAPI 3.0
+A API está totalmente documentada de forma interativa utilizando o **Springdoc OpenAPI**.
+* **Swagger UI (Interativo):** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+* **Especificação OpenAPI (JSON):** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+### Autenticação no Swagger
+Endpoints protegidos exigem autenticação baseada em token JWT. 
+1. Realize uma requisição `POST /auth/login` com credenciais válidas.
+2. Copie o token retornado na resposta.
+3. No topo do Swagger UI, clique no botão **Authorize**, digite o token JWT no campo de texto e confirme.
+
+### Resumo dos Endpoints Ativos
+* **Autenticação (`/auth`)**: Registro público de usuários (`POST /register`) e Login (`POST /login`).
+* **Usuários (`/usuarios`)**: Consulta (`GET /{id}`), atualização segura (`PUT /{id}`) e exclusão de perfil (`DELETE /{id}`).
+* **Unidades de Saúde (`/unidades`)**: Cadastro (`POST`), listagem (`GET`), consulta por ID (`GET /{id}`), atualização (`PUT /{id}`) e exclusão (`DELETE /{id}`).
+* **Agendamentos (`/agendamento`)**: Agendamento de consultas (`POST /agendar`), consultas (`GET /{id_agendamento}`, `GET /data/{dataHoraAgendamento}`), atualização (`PUT /atualizar/{id_agendamento}`) e cancelamento (`PUT /deletar/{id_agendamento}`).
+
 ## Integrantes
 
 Estudantes do 3º Período de ADS na UNINASSAU Paulista - 2026
@@ -95,3 +114,4 @@ Estudantes do 3º Período de ADS na UNINASSAU Paulista - 2026
 - *Guilherme Batista Alves*
 
 ---
+
