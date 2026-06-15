@@ -15,10 +15,10 @@ import jakarta.validation.constraints.NotNull;
 public record AgendamentoRequestDTO
 (   
     @NotNull(message = "O usuário que será consultado é obrigatório")
-    Usuario idUsuario,
+    Long idUsuario,
 
     @NotNull(message = "A unidade de Saúde onde é obrigatória")
-    UnidadeSaude idUnidade,
+    Long idUnidade,
 
     @NotBlank(message = "É necessário informar o tipo de servico")
     String tipoServico,
