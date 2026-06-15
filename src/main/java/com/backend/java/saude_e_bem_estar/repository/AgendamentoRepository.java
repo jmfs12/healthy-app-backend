@@ -12,10 +12,10 @@ import com.backend.java.saude_e_bem_estar.entities.Usuario;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 
-    Optional<Agendamento> findByDataHoraAgendada(LocalDateTime dataHora_agendada);
-    Optional<Agendamento> findById(Long id_agendamento);
+    Optional<Agendamento> findByDataHoraAgendada(LocalDateTime dataHoraAgendada);
+    Optional<Agendamento> findById(Long idAgendamento);
 
-    boolean existsByUsuarioIdAndDataHoraAgendada(Usuario idUsuario, LocalDateTime dataHora);
+    boolean existsByUsuarioAndDataHoraAgendada(Usuario usuario, LocalDateTime dataHora);
 
-    List<Agendamento> findByUsuarioIdOrderByDataHoraAgendadaDesc(Long idUsuario);
-} 
+    List<Agendamento> findByUsuarioIdUsuarioOrderByDataHoraAgendadaDesc(Long idUsuario);
+}

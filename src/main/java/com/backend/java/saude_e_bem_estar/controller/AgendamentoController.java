@@ -39,10 +39,10 @@ public class AgendamentoController {
     @PostMapping("/agendar")
     public ResponseEntity<AgendamentoResponseDTO> create(@RequestBody AgendamentoRequestDTO request) {
         Agendamento novoAgendamento = new Agendamento();
-        novoAgendamento.setId_usuario(request.idUsuario());
-        novoAgendamento.setId_unidade(request.idUnidade());
+        novoAgendamento.setUsuario(request.idUsuario());
+        novoAgendamento.setUnidade(request.idUnidade());
         novoAgendamento.setTipo_servico(request.tipoServico());
-        novoAgendamento.setDataHora_agendada(request.dataHoraAgendada());
+        novoAgendamento.setDataHoraAgendada(request.dataHoraAgendada());
         
         Agendamento agendamentoCriado = agendamentoService.criar(novoAgendamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(AgendamentoResponseDTO.fromEntity(agendamentoCriado));

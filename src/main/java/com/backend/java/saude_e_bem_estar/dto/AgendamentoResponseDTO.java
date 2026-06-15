@@ -16,7 +16,7 @@ public record AgendamentoResponseDTO(
             agendamento.getId_agendamento(),
             agendamento.getStatus(),
             agendamento.getTipo_servico(),
-            agendamento.getDataHora_agendada()
+            agendamento.getDataHoraAgendada()
             
         );
     }

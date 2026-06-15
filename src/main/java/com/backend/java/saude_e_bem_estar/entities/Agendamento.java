@@ -30,18 +30,18 @@ public class Agendamento {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", foreignKey =@ForeignKey(name = "fk_id_usuario"))
-    private Usuario id_usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_unidade", referencedColumnName = "id_unidade", foreignKey =@ForeignKey(name = "fk_id_unidade"))
-    private UnidadeSaude id_unidade;
+    private UnidadeSaude unidade;
 
     @Column(name = "tipo_servico", nullable = false, length = 150)
     private String tipo_servico;
 
     @FutureOrPresent(message = "Não é possivel realizar um atendimento para um dia anterior")
     @Column(name = "dataHora_agendada", nullable = false)
-    private LocalDateTime dataHora_agendada;
+    private LocalDateTime dataHoraAgendada;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 80)

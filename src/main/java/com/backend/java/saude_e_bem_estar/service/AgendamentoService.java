@@ -18,7 +18,7 @@ public class AgendamentoService {
     }
 
     public Agendamento criar(Agendamento agendamento){
-        if (agendamentoRepository.existsByUsuarioIdAndDataHoraAgendada(agendamento.getId_usuario(), agendamento.getDataHora_agendada())) {
+        if (agendamentoRepository.existsByUsuarioAndDataHoraAgendada(agendamento.getUsuario(), agendamento.getDataHoraAgendada())) {
             throw new RuntimeException("Já existe um agendamento cadastrado neste horário.");
         }
 
@@ -43,17 +43,17 @@ public class AgendamentoService {
         Agendamento agendamentoExistente = buscarPorId(id);
 
         
-        if (novosDados.getId_usuario() != null){
-            agendamentoExistente.setId_usuario(novosDados.getId_usuario());
+        if (novosDados.getUsuario() != null){
+            agendamentoExistente.setUsuario(novosDados.getUsuario());
         }
-        if (novosDados.getId_unidade() != null){
-            agendamentoExistente.setId_unidade(novosDados.getId_unidade());
+        if (novosDados.getUnidade() != null){
+            agendamentoExistente.setUnidade(novosDados.getUnidade());
         }
         if (novosDados.getTipo_servico() != null){
             agendamentoExistente.setTipo_servico(novosDados.getTipo_servico());
         }
-        if (novosDados.getDataHora_agendada() != null){
-            agendamentoExistente.setDataHora_agendada(novosDados.getDataHora_agendada());
+        if (novosDados.getDataHoraAgendada() != null){
+            agendamentoExistente.setDataHoraAgendada(novosDados.getDataHoraAgendada());
         }
         if (novosDados.getStatus() != null){
             agendamentoExistente.setStatus(novosDados.getStatus());
