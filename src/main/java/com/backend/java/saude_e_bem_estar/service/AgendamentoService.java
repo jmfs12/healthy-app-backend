@@ -11,7 +11,7 @@ import com.backend.java.saude_e_bem_estar.entities.UnidadeSaude;
 import com.backend.java.saude_e_bem_estar.repository.AgendamentoRepository;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
 import com.backend.java.saude_e_bem_estar.repository.UnidadeSaudeRepository;
-import com.backend.java.saude_e_bem_estar.exceptions.ResourceNotFoundException;
+import com.backend.java.saude_e_bem_estar.exceptions.*;
 
 @Service
 public class AgendamentoService {
@@ -30,12 +30,12 @@ public class AgendamentoService {
 
     public Agendamento criar(Agendamento agendamento, Long idUsuario, Long idUnidade){
         Usuario usuario = usuarioRepository.findById(idUsuario)
-            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+            .orElseThrow(() -> new UsuarioNaoEncontradoException());
         UnidadeSaude unidade = unidadeSaudeRepository.findById(idUnidade)
-            .orElseThrow(() -> new ResourceNotFoundException("Unidade de Saúde não encontrada."));
+            .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
 
         if (agendamentoRepository.existsByUsuarioAndDataHoraAgendada(usuario, agendamento.getDataHoraAgendada())) {
-            throw new RuntimeException("Já existe um agendamento cadastrado neste horário.");
+            throw new ConflitoAgendamentoException();
         }
 
         agendamento.setUsuario(usuario);
@@ -47,12 +47,12 @@ public class AgendamentoService {
 
     public Agendamento buscarPorId(Long id) {
         return agendamentoRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Agendamento não encontrado."));
+            .orElseThrow(() -> new AgendamentoNaoEncontradoException());
     }
 
     public Agendamento buscarPorData(LocalDateTime dataHoraAgendamento){
         return agendamentoRepository.findByDataHoraAgendada(dataHoraAgendamento)
-            .orElseThrow(() -> new ResourceNotFoundException("Data não marcada"));
+            .orElseThrow(() -> new DataNaoMarcadaException());
     }
 
     public Agendamento atualizar(Long id, Agendamento novosDados, Long idUsuario, Long idUnidade){
@@ -60,12 +60,12 @@ public class AgendamentoService {
 
         if (idUsuario != null){
             Usuario usuario = usuarioRepository.findById(idUsuario)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException());
             agendamentoExistente.setUsuario(usuario);
         }
         if (idUnidade != null){
             UnidadeSaude unidade = unidadeSaudeRepository.findById(idUnidade)
-                .orElseThrow(() -> new ResourceNotFoundException("Unidade de Saúde não encontrada."));
+                .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
             agendamentoExistente.setUnidade(unidade);
         }
         if (novosDados.getTipo_servico() != null){

@@ -55,4 +55,19 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(status).body(err);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<CustomErrorResponse> defaultException(Exception e, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        CustomErrorResponse err = new CustomErrorResponse();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Erro interno do servidor");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+    }
 }

@@ -4,6 +4,7 @@ import com.backend.java.saude_e_bem_estar.dto.UnidadeSaudeRequestDTO;
 import com.backend.java.saude_e_bem_estar.dto.UnidadeSaudeResponseDTO;
 import com.backend.java.saude_e_bem_estar.entities.UnidadeSaude;
 import com.backend.java.saude_e_bem_estar.repository.UnidadeSaudeRepository;
+import com.backend.java.saude_e_bem_estar.exceptions.UnidadeSaudeNaoEncontradaException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,14 +41,14 @@ public class UnidadeSaudeService {
 
     public UnidadeSaudeResponseDTO buscarPorId(Long id) {
         UnidadeSaude unidade = unidadeSaudeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Unidade de saúde não encontrada."));
+                .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
 
         return UnidadeSaudeResponseDTO.fromEntity(unidade);
     }
 
     public UnidadeSaudeResponseDTO atualizar(Long id, UnidadeSaudeRequestDTO dto) {
         UnidadeSaude unidade = unidadeSaudeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Unidade de saúde não encontrada."));
+                .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
 
         unidade.setNome_unidade(dto.nome_unidade());
         unidade.setTipo(dto.tipo());
@@ -62,7 +63,7 @@ public class UnidadeSaudeService {
 
     public void deletar(Long id) {
         UnidadeSaude unidade = unidadeSaudeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Unidade de saúde não encontrada."));
+                .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
 
         unidadeSaudeRepository.delete(unidade);
     }

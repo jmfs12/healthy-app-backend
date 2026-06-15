@@ -2,6 +2,9 @@ package com.backend.java.saude_e_bem_estar.service;
 
 import com.backend.java.saude_e_bem_estar.entities.Usuario;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
+import com.backend.java.saude_e_bem_estar.exceptions.UsuarioNaoEncontradoException;
+import com.backend.java.saude_e_bem_estar.exceptions.EmailJaCadastradoException;
+import com.backend.java.saude_e_bem_estar.exceptions.CpfJaCadastradoException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +21,10 @@ public class UsuarioService {
 
     public Usuario criar(Usuario usuario) {
         if (usuarioRepository.existsByEmail(usuario.getEmail())) {
-            throw new RuntimeException("E-mail já cadastrado.");
+            throw new EmailJaCadastradoException();
         }
         if (usuarioRepository.existsByCpf(usuario.getCpf())) {
-            throw new RuntimeException("CPF já cadastrado.");
+            throw new CpfJaCadastradoException();
         }
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
@@ -29,12 +32,12 @@ public class UsuarioService {
 
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException());
     }
 
     public Usuario buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException());
     }
 
     public Usuario atualizar(Long id, Usuario novosDados) {
