@@ -1,6 +1,7 @@
 package com.backend.java.saude_e_bem_estar.controller;
 
 import com.backend.java.saude_e_bem_estar.config.SecurityConfig;
+import com.backend.java.saude_e_bem_estar.dto.UsuarioUpdateRequestDTO;
 import com.backend.java.saude_e_bem_estar.entities.Usuario;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
 import com.backend.java.saude_e_bem_estar.security.SecurityFilter;
@@ -84,10 +85,9 @@ class UsuarioControllerTest {
 
         when(tokenService.validateToken("valid-token")).thenReturn("joao@example.com");
         when(usuarioRepository.findByEmail("joao@example.com")).thenReturn(Optional.of(user));
-        when(usuarioService.atualizar(eq(1L), any(Usuario.class))).thenReturn(updatedUser);
+        when(usuarioService.atualizar(eq(1L), any(UsuarioUpdateRequestDTO.class))).thenReturn(updatedUser);
 
-        Usuario body = new Usuario();
-        body.setNome_completo("João Alterado");
+        UsuarioUpdateRequestDTO body = new UsuarioUpdateRequestDTO("João Alterado", null, null, null);
 
         mockMvc.perform(put("/usuarios/1")
                 .header("Authorization", "Bearer valid-token")

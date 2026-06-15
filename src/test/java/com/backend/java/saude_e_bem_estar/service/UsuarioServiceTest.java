@@ -1,6 +1,7 @@
 package com.backend.java.saude_e_bem_estar.service;
 
 import com.backend.java.saude_e_bem_estar.entities.Usuario;
+import com.backend.java.saude_e_bem_estar.dto.UsuarioUpdateRequestDTO;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -97,10 +98,12 @@ class UsuarioServiceTest {
 
     @Test
     void shouldUpdateUsuarioSuccessfully() {
-        Usuario novosDados = new Usuario();
-        novosDados.setNome_completo("João da Silva Alterado");
-        novosDados.setTelefone("81888888888");
-        novosDados.setData_nascimento(LocalDate.of(1991, 2, 2));
+        UsuarioUpdateRequestDTO novosDados = new UsuarioUpdateRequestDTO(
+            "João da Silva Alterado",
+            LocalDate.of(1991, 2, 2),
+            "81888888888",
+            null
+        );
 
         when(usuarioRepository.findById(1L)).thenReturn(Optional.of(usuario));
         when(usuarioRepository.save(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));

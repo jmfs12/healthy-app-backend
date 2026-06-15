@@ -2,6 +2,7 @@ package com.backend.java.saude_e_bem_estar.service;
 
 import com.backend.java.saude_e_bem_estar.entities.Usuario;
 import com.backend.java.saude_e_bem_estar.repository.UsuarioRepository;
+import com.backend.java.saude_e_bem_estar.dto.UsuarioUpdateRequestDTO;
 import com.backend.java.saude_e_bem_estar.exceptions.UsuarioNaoEncontradoException;
 import com.backend.java.saude_e_bem_estar.exceptions.EmailJaCadastradoException;
 import com.backend.java.saude_e_bem_estar.exceptions.CpfJaCadastradoException;
@@ -40,20 +41,20 @@ public class UsuarioService {
                 .orElseThrow(() -> new UsuarioNaoEncontradoException());
     }
 
-    public Usuario atualizar(Long id, Usuario novosDados) {
+    public Usuario atualizar(Long id, UsuarioUpdateRequestDTO novosDados) {
         Usuario usuarioExistente = buscarPorId(id);
 
-        if (novosDados.getNome_completo() != null) {
-            usuarioExistente.setNome_completo(novosDados.getNome_completo());
+        if (novosDados.nome_completo() != null) {
+            usuarioExistente.setNome_completo(novosDados.nome_completo());
         }
-        if (novosDados.getData_nascimento() != null) {
-            usuarioExistente.setData_nascimento(novosDados.getData_nascimento());
+        if (novosDados.data_nascimento() != null) {
+            usuarioExistente.setData_nascimento(novosDados.data_nascimento());
         }
-        if (novosDados.getTelefone() != null) {
-            usuarioExistente.setTelefone(novosDados.getTelefone());
+        if (novosDados.telefone() != null) {
+            usuarioExistente.setTelefone(novosDados.telefone());
         }
-        if (novosDados.getSenha() != null && !novosDados.getSenha().isEmpty()) {
-            usuarioExistente.setSenha(passwordEncoder.encode(novosDados.getSenha()));
+        if (novosDados.senha() != null && !novosDados.senha().isEmpty()) {
+            usuarioExistente.setSenha(passwordEncoder.encode(novosDados.senha()));
         }
 
         return usuarioRepository.save(usuarioExistente);
