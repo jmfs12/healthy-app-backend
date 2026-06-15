@@ -68,8 +68,8 @@ public class AgendamentoService {
                 .orElseThrow(() -> new UnidadeSaudeNaoEncontradaException());
             agendamentoExistente.setUnidade(unidade);
         }
-        if (novosDados.getTipo_servico() != null){
-            agendamentoExistente.setTipo_servico(novosDados.getTipo_servico());
+        if (novosDados.getTipoServico() != null){
+            agendamentoExistente.setTipoServico(novosDados.getTipoServico());
         }
         if (novosDados.getDataHoraAgendada() != null){
             agendamentoExistente.setDataHoraAgendada(novosDados.getDataHoraAgendada());

@@ -26,7 +26,7 @@ public class Agendamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_agendamento")
-    private long id_agendamento;
+    private Long idAgendamento;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", foreignKey =@ForeignKey(name = "fk_id_usuario"))
@@ -37,7 +37,7 @@ public class Agendamento {
     private UnidadeSaude unidade;
 
     @Column(name = "tipo_servico", nullable = false, length = 150)
-    private String tipo_servico;
+    private String tipoServico;
 
     @FutureOrPresent(message = "Não é possivel realizar um atendimento para um dia anterior")
     @Column(name = "dataHora_agendada", nullable = false)

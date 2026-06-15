@@ -13,11 +13,10 @@ public record AgendamentoResponseDTO(
 ) {
       public static AgendamentoResponseDTO fromEntity(Agendamento agendamento) {
         return new AgendamentoResponseDTO(
-            agendamento.getId_agendamento(),
+            agendamento.getIdAgendamento(),
             agendamento.getStatus(),
-            agendamento.getTipo_servico(),
+            agendamento.getTipoServico(),
             agendamento.getDataHoraAgendada()
-            
         );
     }
 }
